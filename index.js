@@ -34,8 +34,12 @@ var server = http.createServer(function (request, response) {
     } else if(path === '/pay' && method.toUpperCase() === 'POST'){//如果请求的路径是pay且方法为post
         var amount = fs.readFileSync('./db','utf-8')
         var newAmount = amount-1;
-        fs.writeFileSync('./db',newAmount);
-        response.write('success')
+        if(Math.random()>0.5){//模拟成功或失败
+            fs.writeFileSync('./db',newAmount);
+            response.write('success')
+        }else{
+            response.write('fail')
+        }
         response.end()
     }else {  // 如果上面都不是用户请求的路径
         response.statusCode = 404
