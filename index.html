@@ -13,9 +13,11 @@
 
         document.body.appendChild(script);//这句话一定要加上,这是与使用图片请求不一样的地方
 
-        //删除onload代码,交给后台来做
-        script.onerror = function(){//返回码是4开头
-            alert("付钱失败");
+        script.onload = function(e){//如果script请求成功(返回码以2开头)
+            e.currentTarget.remove();//添加移除代码
+        }
+        script.onerror = function(e){//返回码是4开头
+            e.currentTarget.remove();
         }
     }
 </script>
