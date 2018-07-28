@@ -2,6 +2,19 @@
 <link rel="stylesheet" href="/style.css">
 <h5>我的余额为<span id="amount">&&&amount&&&</span></h5>
 <!-- &&&amount&&&知识前台的占位符,会将从后台读取的数据显示在这里,并替换这个占位符 -->
-<form action="/pay" method="POST">
-    <input type="submit" value="付款一元">
-</form>
+
+<button id="button">付钱一元</button>
+<script>
+    let btn = document.getElementById("button");
+    btn.onclick = function(){
+        let img = document.createElement("img");
+        img.src = "/pay";
+        img.onload = function(){//如果图片请求成功(返回码以2开头)
+            alert("付钱成功")
+            window.location.reload();//弹框并刷新
+        }
+        img.onerror = function(){//返回码是4开头
+            alert("付钱失败")
+        }    
+    }
+</script>

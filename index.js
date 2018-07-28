@@ -31,13 +31,16 @@ var server = http.createServer(function (request, response) {
         response.setHeader('Content-Type', 'application/javascript')
         response.write(string)
         response.end()
-    } else if(path === '/pay' && method.toUpperCase() === 'POST'){//如果请求的路径是pay且方法为post
+    } else if(path === '/pay'){//如果请求的路径是pay,接受图片的请求
         var amount = fs.readFileSync('./db','utf-8')
         var newAmount = amount-1;
         if(Math.random()>0.5){//模拟成功或失败
-            fs.writeFileSync('./db',newAmount);
-            response.write('success')
+            fs.writeFileSync('./db',newAmount);//成功了就把数据写入数据库
+            response.setHeader('Content-Type','image/jpg')//设置返回文件类型为jpg
+            response.statusCode = 200;//返回码为200,说明成功
+            response.write(fs.readFileSync('./dog.jpg'))//必须返回一个真的图片,不然浏览器还是会认为是失败
         }else{
+            response.statusCode = 400;//否则返回码为400,说明失败
             response.write('fail')
         }
         response.end()
