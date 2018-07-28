@@ -37,10 +37,10 @@ var server = http.createServer(function (request, response) {
 
         if(Math.random()>0.5){//模拟成功或失败
             fs.writeFileSync('./db',newAmount);//成功了就把数据写入数据库
-            
+
             response.setHeader('Content-Type','applacation/javascript')//设置返回文件类型为javascript
             response.statusCode = 200;//返回码为200,说明成功
-            response.write('alert("我是创建的script请求里面响应的内容")')//响应内容为创建的script标签里面的内容
+            response.write('amount.innerText = amount.innerText-1')//响应内容为创建的script标签里面的内容,返回后会立即执行
         }else{
             response.statusCode = 400;//否则返回码为400,说明失败
             response.write('fail')
