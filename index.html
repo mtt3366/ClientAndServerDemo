@@ -5,11 +5,17 @@
 
 <button id="button">付钱一元</button>
 <script>
+    // 这三行是添加的
+    window.xxx = function(result){
+        alert("我是前端程序员写的函数,经过后端程序员调用才执行")
+        alert(`后端返回回来的函数参数是:${result}`)
+    }
+    // 这三行是添加的
     let btn = document.getElementById("button");
     let amount = document.getElementById("amount")
     btn.onclick = function(){
         let script = document.createElement("script");
-        script.src = "http://jack.com:8002/pay";
+        script.src = "http://jack.com:8002/pay?callbackName=xxx";//请求时带上查询参数,指定callbackName为XXX,以便给后台程序员调用
 
         document.body.appendChild(script);//这句话一定要加上,这是与使用图片请求不一样的地方
 
