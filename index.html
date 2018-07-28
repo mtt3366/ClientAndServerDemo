@@ -8,15 +8,16 @@
     let btn = document.getElementById("button");
     let amount = document.getElementById("amount")
     btn.onclick = function(){
-        let img = document.createElement("img");
-        img.src = "/pay";
-        img.onload = function(){//如果图片请求成功(返回码以2开头)
-            alert("付钱成功")
-            // window.location.reload();//弹框并刷新
-            amount.innerText = amount.innerText-1;//局部刷新/因为已经知道数据库修改成功,所以无需再进行刷新,直接修改数值即可
+        let script = document.createElement("script");
+        script.src = "/pay";
+
+        document.body.appendChild(script);//这句话一定要加上,这是与使用图片请求不一样的地方
+
+        script.onload = function(){//如果script请求成功(返回码以2开头)
+            alert("付钱成功");
         }
-        img.onerror = function(){//返回码是4开头
-            alert("付钱失败")
-        }    
+        script.onerror = function(){//返回码是4开头
+            alert("付钱失败");
+        }
     }
 </script>
