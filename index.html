@@ -9,7 +9,7 @@
     let amount = document.getElementById("amount")
     btn.onclick = function(){
         let script = document.createElement("script");
-        script.src = "/pay";
+        script.src = "http://jack.com:8002/pay";
 
         document.body.appendChild(script);//这句话一定要加上,这是与使用图片请求不一样的地方
 
@@ -17,6 +17,7 @@
             e.currentTarget.remove();//添加移除代码
         }
         script.onerror = function(e){//返回码是4开头
+            alert("失败")
             e.currentTarget.remove();
         }
     }
