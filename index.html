@@ -7,8 +7,9 @@
 <script>
     // 这三行是添加的
     window.xxx = function(result){
-        alert("我是前端程序员写的函数,经过后端程序员调用才执行")
-        alert(`后端返回回来的函数参数是:${result}`)
+        if(result.success === true){
+            amount.innerText = amount.innerText - 1;
+        }
     }
     // 这三行是添加的
     let btn = document.getElementById("button");

@@ -40,7 +40,10 @@ var server = http.createServer(function (request, response) {
 
             response.setHeader('Content-Type','applacation/javascript')//设置返回文件类型为javascript
             response.statusCode = 200;//返回码为200,说明成功
-            response.write(`${query.callbackName}.call(undefined,'success')`)//先获取查询字符串里的callbackName即从前台传过来的回调函数的函数名,然后再执行他,并把函数的参数定为success
+            response.write(`${query.callbackName}.call(undefined,{
+                "success":true,
+                "left":${newAmount}
+            })`)//先获取查询字符串里的callbackName即从前台传过来的回调函数的函数名,然后再执行他,并把函数的参数定为success
         }else{
             response.statusCode = 400;//否则返回码为400,说明失败
             response.write('fail')
